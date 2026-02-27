@@ -40,6 +40,15 @@ body::after {
   box-shadow: 0 8px 30px rgba(129, 140, 248, 0.08);
 }
 
+/* ===== Featured card ===== */
+.featured-card {
+  border-color: rgba(129, 140, 248, 0.25);
+}
+.featured-card:hover {
+  border-color: rgba(129, 140, 248, 0.5);
+  box-shadow: 0 0 40px rgba(129, 140, 248, 0.12), 0 8px 30px rgba(129, 140, 248, 0.08);
+}
+
 /* ===== Glow background ===== */
 .glow-bg {
   position: relative;
