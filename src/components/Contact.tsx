@@ -3,30 +3,10 @@ import { useInView } from './useInView';
 import { Mail, Linkedin, Github, Twitter } from 'lucide-react';
 
 const links = [
-  {
-    label: 'Email',
-    value: 'rohankumarvg@gmail.com',
-    href: 'mailto:rohankumarvg@gmail.com',
-    icon: Mail,
-  },
-  {
-    label: 'LinkedIn',
-    value: 'rohankumarvg',
-    href: 'https://linkedin.com/in/rohankumarvg',
-    icon: Linkedin,
-  },
-  {
-    label: 'GitHub',
-    value: 'rohankumarvg',
-    href: 'https://github.com/rohankumarvg',
-    icon: Github,
-  },
-  {
-    label: 'Twitter',
-    value: '@MrPeacetopia',
-    href: 'https://twitter.com/MrPeacetopia',
-    icon: Twitter,
-  },
+  { label: 'Email', value: 'rohankumarvg@gmail.com', href: 'mailto:rohankumarvg@gmail.com', icon: Mail },
+  { label: 'LinkedIn', value: 'rohankumarvg', href: 'https://linkedin.com/in/rohankumarvg', icon: Linkedin },
+  { label: 'GitHub', value: 'rohankumarvg', href: 'https://github.com/rohankumarvg', icon: Github },
+  { label: 'Twitter', value: '@MrPeacetopia', href: 'https://twitter.com/MrPeacetopia', icon: Twitter },
 ];
 
 export default function Contact() {
@@ -38,8 +18,8 @@ export default function Contact() {
         <motion.span
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : {}}
-          className="inline-block text-xs tracking-[0.2em] uppercase text-[var(--text-muted)] mb-4"
-          style={{ fontFamily: 'var(--font-mono)' }}
+          className="inline-block text-xs tracking-[0.2em] uppercase mb-4"
+          style={{ color: '#71717a', fontFamily: "'JetBrains Mono', monospace" }}
         >
           Get in touch
         </motion.span>
@@ -49,22 +29,22 @@ export default function Contact() {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ delay: 0.1, duration: 0.5 }}
           className="text-3xl md:text-5xl font-bold mb-6 tracking-tight"
-          style={{ fontFamily: 'var(--font-heading)' }}
+          style={{ fontFamily: "'Space Grotesk', system-ui, sans-serif", color: '#e4e4e7' }}
         >
-          Let's work together<span className="text-[var(--accent)]">.</span>
+          Let's work together<span style={{ color: '#818cf8' }}>.</span>
         </motion.h2>
 
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ delay: 0.2, duration: 0.5 }}
-          className="text-[var(--text-muted)] max-w-lg mb-12"
+          className="max-w-lg mb-12"
+          style={{ color: '#71717a' }}
         >
           Looking for someone to automate your business processes or build your
           next product? I'm available for full-time roles and consulting projects.
         </motion.p>
 
-        {/* Contact cards */}
         <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-4">
           {links.map((link, i) => (
             <motion.a
@@ -75,20 +55,15 @@ export default function Contact() {
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: 0.3 + i * 0.1, duration: 0.5 }}
-              className="group p-5 rounded-2xl border border-[var(--border)] bg-[var(--surface)] hover:border-[var(--accent)] transition-all duration-300"
+              className="group p-5 rounded-2xl border transition-all duration-300 hover:scale-[1.03]"
+              style={{ borderColor: '#2a2a3a', backgroundColor: '#13131a' }}
               data-cursor-hover
             >
-              <link.icon
-                size={20}
-                className="text-[var(--text-muted)] group-hover:text-[var(--accent)] transition-colors duration-300 mb-3"
-              />
-              <div
-                className="text-xs text-[var(--text-muted)] mb-1 tracking-wider uppercase"
-                style={{ fontFamily: 'var(--font-mono)' }}
-              >
+              <link.icon size={20} className="mb-3 transition-colors duration-300 group-hover:!text-[#818cf8]" style={{ color: '#71717a' }} />
+              <div className="text-xs mb-1 tracking-wider uppercase" style={{ color: '#71717a', fontFamily: "'JetBrains Mono', monospace" }}>
                 {link.label}
               </div>
-              <div className="text-sm text-[var(--text)] group-hover:text-[var(--accent)] transition-colors duration-300">
+              <div className="text-sm group-hover:!text-[#818cf8] transition-colors duration-300" style={{ color: '#e4e4e7' }}>
                 {link.value}
               </div>
             </motion.a>

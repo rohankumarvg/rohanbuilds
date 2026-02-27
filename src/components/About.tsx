@@ -19,14 +19,13 @@ export default function About() {
         <motion.span
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : {}}
-          className="inline-block text-xs tracking-[0.2em] uppercase text-[var(--text-muted)] mb-4"
-          style={{ fontFamily: 'var(--font-mono)' }}
+          className="inline-block text-xs tracking-[0.2em] uppercase mb-4"
+          style={{ color: '#71717a', fontFamily: "'JetBrains Mono', monospace" }}
         >
           About
         </motion.span>
 
         <div className="grid md:grid-cols-5 gap-16">
-          {/* Left column - text */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -35,14 +34,14 @@ export default function About() {
           >
             <h2
               className="text-3xl md:text-5xl font-bold mb-8 tracking-tight"
-              style={{ fontFamily: 'var(--font-heading)' }}
+              style={{ fontFamily: "'Space Grotesk', system-ui, sans-serif", color: '#e4e4e7' }}
             >
-              Not a developer<span className="text-[var(--accent)]">.</span>
+              Not a developer<span style={{ color: '#818cf8' }}>.</span>
               <br />
-              A builder<span className="text-[var(--accent)]">.</span>
+              A builder<span style={{ color: '#818cf8' }}>.</span>
             </h2>
 
-            <div className="space-y-5 text-[var(--text-muted)] leading-relaxed">
+            <div className="space-y-5 leading-relaxed" style={{ color: '#71717a' }}>
               <p>
                 I don't write code line by line. I architect systems, design business logic,
                 and build workflows that replace manual processes. My tool of choice is n8n,
@@ -61,14 +60,13 @@ export default function About() {
             </div>
           </motion.div>
 
-          {/* Right column - timeline */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ delay: 0.3, duration: 0.6 }}
             className="md:col-span-2"
           >
-            <div className="relative pl-8 border-l border-[var(--border)]">
+            <div className="relative pl-8" style={{ borderLeft: '1px solid #2a2a3a' }}>
               {journey.map((item, i) => (
                 <motion.div
                   key={item.year}
@@ -77,18 +75,17 @@ export default function About() {
                   transition={{ delay: 0.4 + i * 0.1, duration: 0.4 }}
                   className="relative mb-8 last:mb-0"
                 >
-                  {/* Dot */}
-                  <div className="absolute -left-[calc(2rem+4.5px)] top-1 w-2 h-2 rounded-full bg-[var(--border)] group-hover:bg-[var(--accent)]" />
-
+                  <div
+                    className="absolute top-1 w-2 h-2 rounded-full"
+                    style={{ left: 'calc(-1rem - 4.5px)', backgroundColor: item.year === 'Now' ? '#818cf8' : '#2a2a3a' }}
+                  />
                   <span
-                    className={`block text-xs font-bold tracking-wider mb-1 ${
-                      item.year === 'Now' ? 'text-[var(--accent)]' : 'text-[var(--text-muted)]'
-                    }`}
-                    style={{ fontFamily: 'var(--font-mono)' }}
+                    className="block text-xs font-bold tracking-wider mb-1"
+                    style={{ color: item.year === 'Now' ? '#818cf8' : '#71717a', fontFamily: "'JetBrains Mono', monospace" }}
                   >
                     {item.year}
                   </span>
-                  <span className="text-sm text-[var(--text)]">{item.label}</span>
+                  <span className="text-sm" style={{ color: '#e4e4e7' }}>{item.label}</span>
                 </motion.div>
               ))}
             </div>

@@ -7,8 +7,8 @@ export default function Hero() {
     <section className="relative min-h-screen flex flex-col justify-center px-6 overflow-hidden">
       {/* Background glow */}
       <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[600px] opacity-40 pointer-events-none">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(129,140,248,0.12)_0%,transparent_70%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_30%_50%,rgba(52,211,153,0.06)_0%,transparent_60%)]" />
+        <div className="absolute inset-0" style={{ background: 'radial-gradient(ellipse at center, rgba(129,140,248,0.12) 0%, transparent 70%)' }} />
+        <div className="absolute inset-0" style={{ background: 'radial-gradient(ellipse at 30% 50%, rgba(52,211,153,0.06) 0%, transparent 60%)' }} />
       </div>
 
       <div className="relative max-w-5xl mx-auto w-full pt-32 pb-20">
@@ -20,10 +20,10 @@ export default function Hero() {
           className="mb-8"
         >
           <span
-            className="inline-flex items-center gap-2 text-xs tracking-widest uppercase text-[var(--text-muted)] px-4 py-2 rounded-full border border-[var(--border)] bg-[var(--surface)]"
-            style={{ fontFamily: 'var(--font-mono)' }}
+            className="inline-flex items-center gap-2 text-xs tracking-widest uppercase px-4 py-2 rounded-full border"
+            style={{ color: '#71717a', borderColor: '#2a2a3a', backgroundColor: '#13131a', fontFamily: "'JetBrains Mono', monospace" }}
           >
-            <span className="w-2 h-2 rounded-full bg-[var(--success)] animate-pulse" />
+            <span className="w-2 h-2 rounded-full animate-pulse" style={{ backgroundColor: '#34d399' }} />
             Available for work
           </span>
         </motion.div>
@@ -43,14 +43,14 @@ export default function Hero() {
               className="overflow-hidden"
             >
               <h1
-                className="text-[clamp(3rem,8vw,7rem)] font-bold leading-[0.95] tracking-[-0.03em]"
-                style={{ fontFamily: 'var(--font-heading)' }}
+                className="font-bold leading-[0.95] tracking-[-0.03em]"
+                style={{
+                  fontFamily: "'Space Grotesk', system-ui, sans-serif",
+                  fontSize: 'clamp(3rem, 8vw, 7rem)',
+                  color: word === 'systems' ? '#818cf8' : '#e4e4e7',
+                }}
               >
-                {word === 'systems' ? (
-                  <span className="text-[var(--accent)]">{word}</span>
-                ) : (
-                  word
-                )}
+                {word}
               </h1>
             </motion.div>
           ))}
@@ -61,7 +61,8 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.9, duration: 0.6 }}
-          className="max-w-lg text-lg text-[var(--text-muted)] leading-relaxed mb-10"
+          className="max-w-lg text-lg leading-relaxed mb-10"
+          style={{ color: '#71717a' }}
         >
           n8n automation specialist who turns manual business processes into
           self-running workflows. 100+ production automations. Two apps shipped.
@@ -76,24 +77,18 @@ export default function Hero() {
         >
           <a
             href="#projects"
-            data-cursor-hover
-            className="group inline-flex items-center gap-2 px-6 py-3 bg-[var(--text)] text-[var(--bg)] font-medium rounded-lg hover:bg-[var(--accent)] transition-colors duration-300"
+            className="group inline-flex items-center gap-2 px-6 py-3 font-medium rounded-lg transition-all duration-300 hover:scale-105"
+            style={{ backgroundColor: '#e4e4e7', color: '#0a0a0f' }}
           >
             See my work
-            <svg
-              className="w-4 h-4 group-hover:translate-x-1 transition-transform"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              strokeWidth={2}
-            >
+            <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>
           </a>
           <a
             href="#contact"
-            data-cursor-hover
-            className="px-6 py-3 text-[var(--text-muted)] hover:text-[var(--text)] border border-[var(--border)] rounded-lg hover:border-[var(--accent)] transition-all duration-300"
+            className="px-6 py-3 rounded-lg border transition-all duration-300 hover:scale-105"
+            style={{ color: '#71717a', borderColor: '#2a2a3a' }}
           >
             Get in touch
           </a>
@@ -108,15 +103,16 @@ export default function Hero() {
         >
           <div className="flex flex-col items-center gap-2">
             <span
-              className="text-[10px] tracking-[0.2em] uppercase text-[var(--text-muted)] [writing-mode:vertical-lr]"
-              style={{ fontFamily: 'var(--font-mono)' }}
+              className="text-[10px] tracking-[0.2em] uppercase"
+              style={{ color: '#71717a', fontFamily: "'JetBrains Mono', monospace", writingMode: 'vertical-lr' }}
             >
               scroll
             </span>
             <motion.div
               animate={{ y: [0, 8, 0] }}
               transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
-              className="w-px h-8 bg-gradient-to-b from-[var(--text-muted)] to-transparent"
+              className="w-px h-8"
+              style={{ background: 'linear-gradient(to bottom, #71717a, transparent)' }}
             />
           </div>
         </motion.div>
