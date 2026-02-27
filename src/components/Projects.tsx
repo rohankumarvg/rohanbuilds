@@ -13,8 +13,8 @@ interface Project {
 const projects: Project[] = [
   {
     title: 'LastSend',
-    tagline: 'Subscription management for content creators',
-    description: 'Full mobile app with 40+ n8n workflows handling payments, media processing, push notifications, and subscription lifecycle. Integrated PayPal, Google Play Billing, Razorpay, Cloudflare R2, Firebase FCM.',
+    tagline: 'Digital legacy app for final messages',
+    description: 'Mobile app where users compose messages, photos, videos, and voice recordings to be delivered to loved ones after they pass. 40+ n8n workflows handling payments, media processing, push notifications, check-in verification, and delivery triggers. Integrated PayPal, Google Play Billing, Razorpay, Cloudflare R2, Firebase FCM.',
     tech: ['n8n', 'React', 'Capacitor', 'Supabase', 'Docker', 'Hetzner'],
     metrics: ['40+ workflows', '6 payment integrations', 'Queue mode'],
     featured: true,
@@ -59,15 +59,26 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{ delay: index * 0.1, duration: 0.5 }}
       className={`card p-8 flex flex-col ${project.featured ? 'md:col-span-2' : ''}`}
+      style={project.featured ? { borderTopColor: '#818cf8', borderTopWidth: '2px' } : {}}
     >
       {/* Title row */}
       <div className="mb-4">
-        <h3
-          className="text-2xl font-bold mb-1"
-          style={{ fontFamily: "'Space Grotesk', sans-serif", color: '#fafafa' }}
-        >
-          {project.title}
-        </h3>
+        <div className="flex items-center gap-3 mb-1">
+          <h3
+            className="text-2xl font-bold"
+            style={{ fontFamily: "'Space Grotesk', sans-serif", color: '#fafafa' }}
+          >
+            {project.title}
+          </h3>
+          {project.featured && (
+            <span
+              className="text-[10px] tracking-wider uppercase px-2.5 py-0.5 rounded-full"
+              style={{ color: '#818cf8', border: '1px solid rgba(129,140,248,0.3)', fontFamily: "'JetBrains Mono', monospace" }}
+            >
+              Flagship
+            </span>
+          )}
+        </div>
         <p className="text-sm" style={{ color: '#71717a' }}>{project.tagline}</p>
       </div>
 
