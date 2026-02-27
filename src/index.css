@@ -1,18 +1,19 @@
 @import "tailwindcss";
 
 /* ===== Base ===== */
-*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+@layer base {
+  html { scroll-behavior: smooth; }
 
-body {
-  background-color: #09090b;
-  color: #e4e4e7;
-  font-family: 'Inter', system-ui, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
+  body {
+    background-color: #09090b;
+    color: #e4e4e7;
+    font-family: 'Inter', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  ::selection { background: #818cf8; color: #09090b; }
 }
-
-::selection { background: #818cf8; color: #09090b; }
 
 /* ===== Grain ===== */
 body::after {
