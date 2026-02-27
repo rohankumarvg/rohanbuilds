@@ -10,26 +10,26 @@ const links = [
 ];
 
 export default function Contact() {
-  const [ref, isInView] = useInView(0.2);
+  const [ref, isInView] = useInView(0.1);
 
   return (
-    <section id="contact" ref={ref} className="px-6 py-24">
-      <div className="max-w-5xl mx-auto">
-        <motion.span
+    <section id="contact" ref={ref} className="px-8 md:px-12 py-28">
+      <div className="max-w-4xl mx-auto">
+        <motion.p
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : {}}
-          className="inline-block text-xs tracking-[0.2em] uppercase mb-4"
+          className="text-xs tracking-[0.2em] uppercase mb-4"
           style={{ color: '#71717a', fontFamily: "'JetBrains Mono', monospace" }}
         >
           Get in touch
-        </motion.span>
+        </motion.p>
 
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 0.1, duration: 0.5 }}
+          transition={{ delay: 0.1 }}
           className="text-3xl md:text-5xl font-bold mb-6 tracking-tight"
-          style={{ fontFamily: "'Space Grotesk', system-ui, sans-serif", color: '#e4e4e7' }}
+          style={{ fontFamily: "'Space Grotesk', sans-serif", color: '#fafafa' }}
         >
           Let's work together<span style={{ color: '#818cf8' }}>.</span>
         </motion.h2>
@@ -37,15 +37,15 @@ export default function Contact() {
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 0.2, duration: 0.5 }}
-          className="max-w-lg mb-12"
-          style={{ color: '#71717a' }}
+          transition={{ delay: 0.2 }}
+          className="max-w-lg mb-14 text-base"
+          style={{ color: '#a1a1aa' }}
         >
           Looking for someone to automate your business processes or build your
           next product? I'm available for full-time roles and consulting projects.
         </motion.p>
 
-        <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-4">
+        <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-5">
           {links.map((link, i) => (
             <motion.a
               key={link.label}
@@ -54,16 +54,14 @@ export default function Contact() {
               rel="noopener noreferrer"
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: 0.3 + i * 0.1, duration: 0.5 }}
-              className="group p-5 rounded-2xl border transition-all duration-300 hover:scale-[1.03]"
-              style={{ borderColor: '#2a2a3a', backgroundColor: '#13131a' }}
-              data-cursor-hover
+              transition={{ delay: 0.3 + i * 0.08 }}
+              className="card p-6 block"
             >
-              <link.icon size={20} className="mb-3 transition-colors duration-300 group-hover:!text-[#818cf8]" style={{ color: '#71717a' }} />
-              <div className="text-xs mb-1 tracking-wider uppercase" style={{ color: '#71717a', fontFamily: "'JetBrains Mono', monospace" }}>
+              <link.icon size={22} className="mb-4" style={{ color: '#71717a' }} />
+              <div className="text-xs mb-1.5 tracking-wider uppercase" style={{ color: '#71717a', fontFamily: "'JetBrains Mono', monospace" }}>
                 {link.label}
               </div>
-              <div className="text-sm group-hover:!text-[#818cf8] transition-colors duration-300" style={{ color: '#e4e4e7' }}>
+              <div className="text-sm font-medium" style={{ color: '#e4e4e7' }}>
                 {link.value}
               </div>
             </motion.a>

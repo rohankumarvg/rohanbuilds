@@ -1,122 +1,99 @@
 import { motion } from 'framer-motion';
 
-const titleWords = ['I build', 'systems', 'that run', 'without me.'];
-
 export default function Hero() {
   return (
-    <section className="relative min-h-screen flex flex-col justify-center px-6 overflow-hidden">
-      {/* Background glow */}
-      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[600px] opacity-40 pointer-events-none">
-        <div className="absolute inset-0" style={{ background: 'radial-gradient(ellipse at center, rgba(129,140,248,0.12) 0%, transparent 70%)' }} />
-        <div className="absolute inset-0" style={{ background: 'radial-gradient(ellipse at 30% 50%, rgba(52,211,153,0.06) 0%, transparent 60%)' }} />
+    <section className="relative min-h-screen flex flex-col justify-center overflow-hidden">
+      {/* Big gradient blob */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <div
+          className="absolute w-[1000px] h-[800px] opacity-30"
+          style={{
+            top: '10%',
+            left: '50%',
+            transform: 'translateX(-50%)',
+            background: 'radial-gradient(ellipse at center, rgba(129,140,248,0.15) 0%, rgba(99,102,241,0.05) 40%, transparent 70%)',
+            filter: 'blur(60px)',
+          }}
+        />
       </div>
 
-      <div className="relative max-w-5xl mx-auto w-full pt-32 pb-20">
-        {/* Status badge */}
+      <div className="relative max-w-4xl mx-auto w-full px-8 md:px-12 pt-40 pb-24">
+        {/* Status */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2, duration: 0.6 }}
-          className="mb-8"
+          className="mb-10"
         >
           <span
-            className="inline-flex items-center gap-2 text-xs tracking-widest uppercase px-4 py-2 rounded-full border"
-            style={{ color: '#71717a', borderColor: '#2a2a3a', backgroundColor: '#13131a', fontFamily: "'JetBrains Mono', monospace" }}
+            className="inline-flex items-center gap-2.5 text-xs tracking-widest uppercase px-5 py-2.5 rounded-full"
+            style={{
+              color: '#a1a1aa',
+              border: '1px solid #27272a',
+              backgroundColor: '#18181b',
+              fontFamily: "'JetBrains Mono', monospace",
+            }}
           >
             <span className="w-2 h-2 rounded-full animate-pulse" style={{ backgroundColor: '#34d399' }} />
             Available for work
           </span>
         </motion.div>
 
-        {/* Main title */}
-        <div className="mb-8">
-          {titleWords.map((word, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 60 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{
-                delay: 0.3 + i * 0.12,
-                duration: 0.7,
-                ease: [0.16, 1, 0.3, 1],
-              }}
-              className="overflow-hidden"
-            >
-              <h1
-                className="font-bold leading-[0.95] tracking-[-0.03em]"
-                style={{
-                  fontFamily: "'Space Grotesk', system-ui, sans-serif",
-                  fontSize: 'clamp(3rem, 8vw, 7rem)',
-                  color: word === 'systems' ? '#818cf8' : '#e4e4e7',
-                }}
-              >
-                {word}
-              </h1>
-            </motion.div>
-          ))}
-        </div>
+        {/* Title */}
+        <motion.h1
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.4, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          className="font-bold leading-[1] tracking-[-0.04em] mb-8"
+          style={{ fontFamily: "'Space Grotesk', system-ui, sans-serif", fontSize: 'clamp(2.8rem, 7vw, 5.5rem)' }}
+        >
+          <span style={{ color: '#fafafa' }}>I build </span>
+          <span style={{ color: '#818cf8' }}>systems</span>
+          <br />
+          <span style={{ color: '#fafafa' }}>that run without me.</span>
+        </motion.h1>
 
         {/* Subtitle */}
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.9, duration: 0.6 }}
-          className="max-w-lg text-lg leading-relaxed mb-10"
-          style={{ color: '#71717a' }}
+          transition={{ delay: 0.7, duration: 0.6 }}
+          className="max-w-xl text-lg leading-relaxed mb-12"
+          style={{ color: '#a1a1aa' }}
         >
           n8n automation specialist who turns manual business processes into
           self-running workflows. 100+ production automations. Two apps shipped.
         </motion.p>
 
-        {/* CTA buttons */}
+        {/* Buttons */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.1, duration: 0.6 }}
-          className="flex gap-4 items-center"
+          transition={{ delay: 0.9, duration: 0.6 }}
+          className="flex gap-4 items-center flex-wrap"
         >
           <a
             href="#projects"
-            className="group inline-flex items-center gap-2 px-6 py-3 font-medium rounded-lg transition-all duration-300 hover:scale-105"
-            style={{ backgroundColor: '#e4e4e7', color: '#0a0a0f' }}
+            className="group inline-flex items-center gap-2 px-7 py-3.5 font-semibold rounded-xl transition-all duration-300 hover:shadow-lg hover:shadow-indigo-500/20 hover:scale-[1.03]"
+            style={{ backgroundColor: '#818cf8', color: '#09090b' }}
           >
             See my work
-            <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
             </svg>
           </a>
           <a
             href="#contact"
-            className="px-6 py-3 rounded-lg border transition-all duration-300 hover:scale-105"
-            style={{ color: '#71717a', borderColor: '#2a2a3a' }}
+            className="px-7 py-3.5 rounded-xl font-medium transition-all duration-300 hover:scale-[1.03]"
+            style={{ color: '#e4e4e7', border: '1px solid #3f3f46' }}
           >
             Get in touch
           </a>
         </motion.div>
-
-        {/* Scroll indicator */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.5, duration: 0.8 }}
-          className="absolute bottom-8 left-6"
-        >
-          <div className="flex flex-col items-center gap-2">
-            <span
-              className="text-[10px] tracking-[0.2em] uppercase"
-              style={{ color: '#71717a', fontFamily: "'JetBrains Mono', monospace", writingMode: 'vertical-lr' }}
-            >
-              scroll
-            </span>
-            <motion.div
-              animate={{ y: [0, 8, 0] }}
-              transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
-              className="w-px h-8"
-              style={{ background: 'linear-gradient(to bottom, #71717a, transparent)' }}
-            />
-          </div>
-        </motion.div>
       </div>
+
+      {/* Divider line */}
+      <div className="absolute bottom-0 left-0 right-0 h-px" style={{ background: 'linear-gradient(to right, transparent, #27272a, transparent)' }} />
     </section>
   );
 }
