@@ -5,12 +5,9 @@ import Projects from './components/Projects';
 import About from './components/About';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
-import CustomCursor from './components/CustomCursor';
-
 export default function App() {
   return (
     <>
-      <CustomCursor />
       <Navbar />
       <main>
         <Hero />

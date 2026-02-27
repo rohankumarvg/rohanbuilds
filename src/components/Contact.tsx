@@ -3,10 +3,10 @@ import { useInView } from './useInView';
 import { Mail, Linkedin, Github, Twitter } from 'lucide-react';
 
 const links = [
-  { label: 'Email', value: 'rohankumarvg@gmail.com', href: 'mailto:rohankumarvg@gmail.com', icon: Mail },
-  { label: 'LinkedIn', value: 'rohankumarvg', href: 'https://linkedin.com/in/rohankumarvg', icon: Linkedin },
-  { label: 'GitHub', value: 'rohankumarvg', href: 'https://github.com/rohankumarvg', icon: Github },
-  { label: 'Twitter', value: '@MrPeacetopia', href: 'https://twitter.com/MrPeacetopia', icon: Twitter },
+  { label: 'Email', href: 'mailto:rohankumarvg@gmail.com', icon: Mail },
+  { label: 'LinkedIn', href: 'https://linkedin.com/in/rohankumarvg', icon: Linkedin },
+  { label: 'GitHub', href: 'https://github.com/rohankumarvg', icon: Github },
+  { label: 'Twitter', href: 'https://twitter.com/MrPeacetopia', icon: Twitter },
 ];
 
 export default function Contact() {
@@ -45,28 +45,28 @@ export default function Contact() {
           next product? I'm available for full-time roles and consulting projects.
         </motion.p>
 
-        <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-5">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ delay: 0.3 }}
+          className="flex gap-4"
+        >
           {links.map((link, i) => (
             <motion.a
               key={link.label}
               href={link.href}
               target={link.label === 'Email' ? undefined : '_blank'}
               rel="noopener noreferrer"
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: 0.3 + i * 0.08 }}
-              className="card p-6 block"
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={isInView ? { opacity: 1, scale: 1 } : {}}
+              transition={{ delay: 0.35 + i * 0.06 }}
+              className="card flex items-center justify-center w-14 h-14"
+              aria-label={link.label}
             >
-              <link.icon size={22} className="mb-4" style={{ color: '#71717a' }} />
-              <div className="text-xs mb-1.5 tracking-wider uppercase" style={{ color: '#71717a', fontFamily: "'JetBrains Mono', monospace" }}>
-                {link.label}
-              </div>
-              <div className="text-sm font-medium" style={{ color: '#e4e4e7' }}>
-                {link.value}
-              </div>
+              <link.icon size={22} style={{ color: '#a1a1aa' }} />
             </motion.a>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

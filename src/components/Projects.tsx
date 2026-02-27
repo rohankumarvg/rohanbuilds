@@ -21,10 +21,17 @@ const projects: Project[] = [
   },
   {
     title: 'Orbit',
-    tagline: 'AI-powered community engagement',
-    description: 'Reddit monitoring system that tracks brand mentions, generates AI responses, and manages community engagement. Multi-tenant Supabase backend with RLS.',
-    tech: ['n8n', 'React', 'Supabase', 'Gemini AI', 'Reddit API'],
-    metrics: ['Real-time monitoring', 'AI responses', 'Multi-tenant'],
+    tagline: 'Self-service client portal',
+    description: 'Client-facing portal with subscription management, wallet-based billing, Razorpay payments (UPI, card, netbanking), and a full admin panel. Multi-currency support, client invite flow, password reset. Built and deployed in 2 days.',
+    tech: ['n8n', 'React', 'Supabase', 'Razorpay', 'Hetzner'],
+    metrics: ['Built in 2 days', 'Multi-currency', 'Wallet system'],
+  },
+  {
+    title: 'Suzuki Dealership',
+    tagline: 'WhatsApp automation for vehicle sales',
+    description: 'Automated WhatsApp messaging for a Suzuki dealership. Daily workflow reads sales register, filters new invoices, sends personalized welcome messages with service reminders. Rate limiting and duplicate prevention built in.',
+    tech: ['n8n', 'Evolution API', 'Google Sheets', 'WhatsApp'],
+    metrics: ['Daily auto-send', 'Duplicate prevention', 'Rate limited'],
   },
   {
     title: 'Turquaz Restaurant',

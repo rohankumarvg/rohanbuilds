@@ -2,12 +2,11 @@ import { motion } from 'framer-motion';
 import { useInView } from './useInView';
 
 const journey = [
-  { year: '2019', label: 'Film school grad, started freelancing' },
-  { year: '2020', label: 'Founded Brand Jet Media, video production' },
-  { year: '2023', label: 'Discovered n8n, first automation workflow' },
-  { year: '2024', label: 'Built LastSend (40+ workflows, full app)' },
-  { year: '2025', label: '100+ production workflows, 2 apps shipped' },
-  { year: 'Now', label: 'Building automation systems for businesses' },
+  { year: '2024', label: 'Discovered n8n, built first automation workflows' },
+  { year: '2025', label: 'Built LastSend - 40+ workflows, payments, full app' },
+  { year: '2025', label: 'Orbit client portal + Suzuki dealership automation' },
+  { year: '2026', label: 'Full Stack Open + The Odin Project' },
+  { year: 'Now', label: '100+ production workflows, building for businesses' },
 ];
 
 export default function About() {
@@ -48,9 +47,9 @@ export default function About() {
                 where I've built 100+ production automations.
               </p>
               <p>
-                I came from film production, not computer science. That background taught me
-                something engineers often miss: how to think about the end user, how to
-                manage complex projects under pressure, and how to deliver on deadline.
+                I'm self-taught, not CS-educated. That means I think about the end user
+                first, not the tech stack. I manage complex projects under pressure
+                and deliver on deadline.
               </p>
               <p>
                 When I build something, it runs in production. Real payments, real users,
@@ -69,7 +68,7 @@ export default function About() {
             <div className="relative pl-8" style={{ borderLeft: '1px solid #27272a' }}>
               {journey.map((item, i) => (
                 <motion.div
-                  key={item.year}
+                  key={item.label}
                   initial={{ opacity: 0, x: -10 }}
                   animate={isInView ? { opacity: 1, x: 0 } : {}}
                   transition={{ delay: 0.4 + i * 0.08, duration: 0.4 }}
