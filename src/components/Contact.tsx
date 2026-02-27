@@ -1,9 +1,11 @@
+import { useState, FormEvent } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from './useInView';
-import { Mail, Linkedin, Github, Twitter } from 'lucide-react';
+import { Linkedin, Github, Twitter, Send, Check } from 'lucide-react';
 
-const links = [
-  { label: 'Email', href: 'mailto:rohankumarvg@gmail.com', icon: Mail },
+const WEBHOOK_URL = 'https://auto.brandjetmedia.com/webhook/website/form-submission';
+
+const socials = [
   { label: 'LinkedIn', href: 'https://linkedin.com/in/rohankumarvg', icon: Linkedin },
   { label: 'GitHub', href: 'https://github.com/rohankumarvg', icon: Github },
   { label: 'Twitter', href: 'https://twitter.com/MrPeacetopia', icon: Twitter },
@@ -11,6 +13,43 @@ const links = [
 
 export default function Contact() {
   const [ref, isInView] = useInView(0.1);
+  const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle');
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setStatus('sending');
+
+    const form = e.currentTarget;
+    const data = {
+      name: (form.elements.namedItem('name') as HTMLInputElement).value,
+      email: (form.elements.namedItem('email') as HTMLInputElement).value,
+      company: (form.elements.namedItem('company') as HTMLInputElement).value,
+      message: (form.elements.namedItem('message') as HTMLTextAreaElement).value,
+      submittedAt: new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }),
+      source: 'rohanbuilds-contact-form',
+    };
+
+    try {
+      await fetch(WEBHOOK_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+      setStatus('sent');
+      form.reset();
+    } catch {
+      setStatus('error');
+    }
+  };
+
+  const inputStyle = {
+    backgroundColor: '#18181b',
+    border: '1px solid #27272a',
+    color: '#e4e4e7',
+    borderRadius: '12px',
+    outline: 'none',
+    fontFamily: "'Inter', system-ui, sans-serif",
+  };
 
   return (
     <section id="contact" ref={ref} className="px-8 md:px-12 py-28">
@@ -38,35 +77,99 @@ export default function Contact() {
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ delay: 0.2 }}
-          className="max-w-lg mb-14 text-base"
+          className="max-w-lg mb-12 text-base"
           style={{ color: '#a1a1aa' }}
         >
           Looking for someone to automate your business processes or build your
           next product? I'm available for full-time roles and consulting projects.
         </motion.p>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 0.3 }}
-          className="flex gap-4"
-        >
-          {links.map((link, i) => (
-            <motion.a
-              key={link.label}
-              href={link.href}
-              target={link.label === 'Email' ? undefined : '_blank'}
-              rel="noopener noreferrer"
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={isInView ? { opacity: 1, scale: 1 } : {}}
-              transition={{ delay: 0.35 + i * 0.06 }}
-              className="card flex items-center justify-center w-14 h-14"
-              aria-label={link.label}
+        <div className="grid md:grid-cols-5 gap-12 md:gap-16">
+          {/* Form */}
+          <motion.form
+            onSubmit={handleSubmit}
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ delay: 0.3 }}
+            className="md:col-span-3 space-y-5"
+          >
+            <div className="grid sm:grid-cols-2 gap-5">
+              <input
+                name="name"
+                type="text"
+                placeholder="Name"
+                required
+                minLength={2}
+                className="w-full px-4 py-3 text-sm placeholder:text-zinc-600 focus:border-indigo-400/50 transition-colors"
+                style={inputStyle}
+              />
+              <input
+                name="email"
+                type="email"
+                placeholder="Email"
+                required
+                className="w-full px-4 py-3 text-sm placeholder:text-zinc-600 focus:border-indigo-400/50 transition-colors"
+                style={inputStyle}
+              />
+            </div>
+            <input
+              name="company"
+              type="text"
+              placeholder="Company"
+              required
+              className="w-full px-4 py-3 text-sm placeholder:text-zinc-600 focus:border-indigo-400/50 transition-colors"
+              style={inputStyle}
+            />
+            <textarea
+              name="message"
+              placeholder="What would you like to automate?"
+              required
+              minLength={10}
+              rows={4}
+              className="w-full px-4 py-3 text-sm placeholder:text-zinc-600 focus:border-indigo-400/50 transition-colors resize-none"
+              style={inputStyle}
+            />
+            <button
+              type="submit"
+              disabled={status === 'sending' || status === 'sent'}
+              className="inline-flex items-center gap-2 px-7 py-3 text-sm font-semibold rounded-xl transition-all duration-300 hover:shadow-lg hover:shadow-indigo-500/20 disabled:opacity-50"
+              style={{
+                backgroundColor: status === 'sent' ? '#059669' : '#818cf8',
+                color: '#09090b',
+              }}
             >
-              <link.icon size={22} style={{ color: '#a1a1aa' }} />
-            </motion.a>
-          ))}
-        </motion.div>
+              {status === 'idle' && <><Send size={16} /> Send message</>}
+              {status === 'sending' && 'Sending...'}
+              {status === 'sent' && <><Check size={16} /> Sent! I'll be in touch.</>}
+              {status === 'error' && 'Something went wrong. Try again.'}
+            </button>
+          </motion.form>
+
+          {/* Socials */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ delay: 0.4 }}
+            className="md:col-span-2 flex md:flex-col gap-4 md:pt-2"
+          >
+            {socials.map((link, i) => (
+              <motion.a
+                key={link.label}
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                initial={{ opacity: 0, x: 10 }}
+                animate={isInView ? { opacity: 1, x: 0 } : {}}
+                transition={{ delay: 0.45 + i * 0.06 }}
+                className="card flex items-center gap-3 px-5 py-4"
+                aria-label={link.label}
+              >
+                <link.icon size={20} style={{ color: '#71717a' }} />
+                <span className="text-sm" style={{ color: '#a1a1aa' }}>{link.label}</span>
+              </motion.a>
+            ))}
+          </motion.div>
+        </div>
       </div>
     </section>
   );

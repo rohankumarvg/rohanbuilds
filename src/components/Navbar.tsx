@@ -1,5 +1,6 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
+import { ExternalLink } from 'lucide-react';
 
 const navLinks = [
   { label: 'Work', href: '#projects' },
@@ -10,12 +11,13 @@ const navLinks = [
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('');
+  const [pillStyle, setPillStyle] = useState<{ left: number; width: number } | null>(null);
+  const navRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
 
-      // Detect active section
       const sections = ['contact', 'about', 'projects'];
       let current = '';
       for (const id of sections) {
@@ -30,6 +32,23 @@ export default function Navbar() {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  // Update pill position when active section changes
+  useEffect(() => {
+    if (!activeSection || !navRef.current) {
+      setPillStyle(null);
+      return;
+    }
+    const activeLink = navRef.current.querySelector(`[data-section="${activeSection}"]`) as HTMLElement;
+    if (activeLink) {
+      const navRect = navRef.current.getBoundingClientRect();
+      const linkRect = activeLink.getBoundingClientRect();
+      setPillStyle({
+        left: linkRect.left - navRect.left,
+        width: linkRect.width,
+      });
+    }
+  }, [activeSection]);
 
   return (
     <motion.nav
@@ -58,33 +77,49 @@ export default function Navbar() {
           rohan<span style={{ color: '#818cf8' }}>.</span>
         </a>
 
-        <div className="flex items-center gap-8">
-          {navLinks.map(link => {
-            const sectionId = link.href.replace('#', '');
-            const isActive = activeSection === sectionId;
-            return (
-              <a
-                key={link.href}
-                href={link.href}
-                className="text-sm transition-colors duration-200"
-                style={{ color: isActive ? '#fafafa' : '#a1a1aa' }}
-                onMouseEnter={e => (e.currentTarget.style.color = '#fafafa')}
-                onMouseLeave={e => { if (!isActive) e.currentTarget.style.color = '#a1a1aa'; }}
-              >
-                {link.label}
-              </a>
-            );
-          })}
+        <div className="flex items-center gap-6">
+          {/* Section nav with sliding pill */}
+          <div ref={navRef} className="relative flex items-center gap-1 p-1 rounded-lg" style={{ backgroundColor: 'rgba(24,24,27,0.6)' }}>
+            {/* Sliding pill */}
+            {pillStyle && (
+              <motion.div
+                className="absolute top-1 bottom-1 rounded-md"
+                style={{ backgroundColor: 'rgba(129,140,248,0.15)', border: '1px solid rgba(129,140,248,0.3)' }}
+                animate={{ left: pillStyle.left, width: pillStyle.width }}
+                transition={{ type: 'spring', stiffness: 400, damping: 30 }}
+              />
+            )}
+            {navLinks.map(link => {
+              const sectionId = link.href.replace('#', '');
+              const isActive = activeSection === sectionId;
+              return (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  data-section={sectionId}
+                  className="relative z-10 text-sm px-4 py-1.5 rounded-md transition-colors duration-200"
+                  style={{ color: isActive ? '#fafafa' : '#71717a' }}
+                  onMouseEnter={e => (e.currentTarget.style.color = '#fafafa')}
+                  onMouseLeave={e => { if (!isActive) e.currentTarget.style.color = '#71717a'; }}
+                >
+                  {link.label}
+                </a>
+              );
+            })}
+          </div>
+
+          {/* Resume - clearly an external link */}
           <a
-            href="https://rohankumarvg.github.io/rohan-kumar-standout.html"
+            href="/resume.html"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-sm px-5 py-2 rounded-lg font-medium transition-all duration-200"
-            style={{ color: '#e4e4e7', border: '1px solid #3f3f46' }}
-            onMouseEnter={e => { e.currentTarget.style.borderColor = '#818cf8'; e.currentTarget.style.color = '#fafafa'; }}
-            onMouseLeave={e => { e.currentTarget.style.borderColor = '#3f3f46'; e.currentTarget.style.color = '#e4e4e7'; }}
+            className="flex items-center gap-1.5 text-xs transition-colors duration-200"
+            style={{ color: '#71717a', fontFamily: "'JetBrains Mono', monospace" }}
+            onMouseEnter={e => (e.currentTarget.style.color = '#a1a1aa')}
+            onMouseLeave={e => (e.currentTarget.style.color = '#71717a')}
           >
             Resume
+            <ExternalLink size={12} />
           </a>
         </div>
       </div>

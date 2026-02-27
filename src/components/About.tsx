@@ -1,11 +1,17 @@
 import { motion } from 'framer-motion';
 import { useInView } from './useInView';
 
-const journey = [
+interface JourneyItem {
+  year: string;
+  label: string;
+  link?: { text: string; href: string };
+}
+
+const journey: JourneyItem[] = [
+  { year: '2023', label: 'Full Stack Open + The Odin Project' },
   { year: '2024', label: 'Discovered n8n, built first automation workflows' },
-  { year: '2025', label: 'Built LastSend - 40+ workflows, payments, full app' },
+  { year: '2025', label: 'Built ', link: { text: 'LastSend', href: 'https://lastsend.app' } },
   { year: '2025', label: 'Orbit client portal + Suzuki dealership automation' },
-  { year: '2026', label: 'Full Stack Open + The Odin Project' },
   { year: 'Now', label: '100+ production workflows, building for businesses' },
 ];
 
@@ -88,7 +94,22 @@ export default function About() {
                   >
                     {item.year}
                   </span>
-                  <span className="text-sm" style={{ color: '#e4e4e7' }}>{item.label}</span>
+                  <span className="text-sm" style={{ color: '#e4e4e7' }}>
+                    {item.label}
+                    {item.link && (
+                      <a
+                        href={item.link.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="transition-colors duration-200"
+                        style={{ color: '#818cf8', textDecoration: 'underline', textUnderlineOffset: '3px' }}
+                        onMouseEnter={e => (e.currentTarget.style.color = '#a5b4fc')}
+                        onMouseLeave={e => (e.currentTarget.style.color = '#818cf8')}
+                      >
+                        {item.link.text}
+                      </a>
+                    )}
+                  </span>
                 </motion.div>
               ))}
             </div>
