@@ -132,7 +132,7 @@ export default function Contact() {
             <button
               type="submit"
               disabled={status === 'sending' || status === 'sent'}
-              className="inline-flex items-center gap-2 px-7 py-3 text-sm font-semibold rounded-xl transition-all duration-300 hover:shadow-lg hover:shadow-indigo-500/20 disabled:opacity-50"
+              className="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-7 py-3 text-sm font-semibold rounded-xl transition-all duration-300 hover:shadow-lg hover:shadow-indigo-500/20 disabled:opacity-50"
               style={{
                 backgroundColor: status === 'sent' ? '#059669' : '#818cf8',
                 color: '#09090b',
