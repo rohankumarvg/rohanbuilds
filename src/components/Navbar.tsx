@@ -18,13 +18,23 @@ export default function Navbar() {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
 
-      const sections = ['contact', 'about', 'projects'];
+      // If scrolled to bottom of page, last section (contact) is active
+      const atBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 50;
+      if (atBottom) {
+        setActiveSection('contact');
+        return;
+      }
+
+      // Check sections top-to-bottom, keep the last one whose top has passed the threshold
+      const sectionIds = ['projects', 'about', 'contact'];
       let current = '';
-      for (const id of sections) {
+      for (const id of sectionIds) {
         const el = document.getElementById(id);
-        if (el && window.scrollY >= el.offsetTop - 200) {
-          current = id;
-          break;
+        if (el) {
+          const rect = el.getBoundingClientRect();
+          if (rect.top <= 200) {
+            current = id;
+          }
         }
       }
       setActiveSection(current);
@@ -77,9 +87,9 @@ export default function Navbar() {
           rohan<span style={{ color: '#818cf8' }}>.</span>
         </a>
 
-        <div className="flex items-center gap-6">
+        <div className="flex items-center gap-3 sm:gap-6">
           {/* Section nav with sliding pill */}
-          <div ref={navRef} className="relative flex items-center gap-1 p-1 rounded-lg" style={{ backgroundColor: 'rgba(24,24,27,0.6)' }}>
+          <div ref={navRef} className="relative flex items-center gap-0.5 sm:gap-1 p-1 rounded-lg" style={{ backgroundColor: 'rgba(24,24,27,0.6)' }}>
             {/* Sliding pill */}
             {pillStyle && (
               <motion.div
@@ -97,7 +107,7 @@ export default function Navbar() {
                   key={link.href}
                   href={link.href}
                   data-section={sectionId}
-                  className="relative z-10 text-sm px-4 py-1.5 rounded-md transition-colors duration-200"
+                  className="relative z-10 text-xs sm:text-sm px-2.5 sm:px-4 py-1.5 rounded-md transition-colors duration-200"
                   style={{ color: isActive ? '#fafafa' : '#71717a' }}
                   onMouseEnter={e => (e.currentTarget.style.color = '#fafafa')}
                   onMouseLeave={e => { if (!isActive) e.currentTarget.style.color = '#71717a'; }}
@@ -113,7 +123,7 @@ export default function Navbar() {
             href="/resume.html"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-1.5 text-xs transition-colors duration-200"
+            className="hidden sm:flex items-center gap-1.5 text-xs transition-colors duration-200"
             style={{ color: '#71717a', fontFamily: "'JetBrains Mono', monospace" }}
             onMouseEnter={e => (e.currentTarget.style.color = '#a1a1aa')}
             onMouseLeave={e => (e.currentTarget.style.color = '#71717a')}

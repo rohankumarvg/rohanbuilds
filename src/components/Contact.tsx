@@ -7,8 +7,8 @@ const WEBHOOK_URL = 'https://auto.brandjetmedia.com/webhook/website/form-submiss
 
 const socials = [
   { label: 'LinkedIn', href: 'https://linkedin.com/in/rohankumarvg', icon: Linkedin },
-  { label: 'GitHub', href: 'https://github.com/rohankumarvg', icon: Github },
-  { label: 'Twitter', href: 'https://twitter.com/MrPeacetopia', icon: Twitter },
+  { label: 'GitHub', href: 'https://github.com/RohanSudo', icon: Github },
+  { label: 'Twitter', href: 'https://x.com/RohanSudo', icon: Twitter },
 ];
 
 export default function Contact() {
@@ -52,7 +52,7 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" ref={ref} className="px-8 md:px-12 py-28">
+    <section id="contact" ref={ref} className="px-5 sm:px-8 md:px-12 py-16 sm:py-28">
       <div className="max-w-4xl mx-auto">
         <motion.p
           initial={{ opacity: 0 }}
@@ -150,7 +150,7 @@ export default function Contact() {
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ delay: 0.4 }}
-            className="md:col-span-2 flex md:flex-col gap-4 md:pt-2"
+            className="md:col-span-2 flex flex-col gap-4 md:pt-2"
           >
             {socials.map((link, i) => (
               <motion.a
